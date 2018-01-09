@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "tab-tracker serverside code",
+  "main": "src/app.js",
+  "scripts": {
+    "prestart": "npm run lint",
+    "start": "./node_modules/.bin/nodemon src/app.js --exec",
+    "lint": "./node_modules/.bin/eslint **/*.js"
+  },
+  "author": "Dani Vijay",
+  "license": "GPL v2",
+  "dependencies": {
+    "eslint": "4.15.0",
+    "nodemon": "1.14.9"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "11.0.0-beta.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-standard": "3.0.1"
+  }
+}
