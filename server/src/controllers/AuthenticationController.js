@@ -34,7 +34,7 @@ module.exports = {
         })
       }
 
-      const isPasswordValid = await User.comparePassword(password)
+      const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
           error: 'Incurrect login information2'
