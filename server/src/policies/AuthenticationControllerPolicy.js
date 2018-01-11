@@ -14,13 +14,13 @@ module.exports = {
     if (error) {
       switch (error.details[0].context.key) {
         case 'email':
-          res.status(400).send({
+          res.status(403).send({
             error: 'Invalid Email',
             info: value
           })
           break
         case 'password':
-          res.status(400).send({
+          res.status(403).send({
             error: `Password must be <br>
             1. Valid charactors : lowercase, uppercase, numeric <br>
             2. Greater than 8 characters <br>
