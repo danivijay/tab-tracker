@@ -8,10 +8,22 @@
           </v-toolbar-title>
           </v-toolbar>
           <div class="pl-4 pr-4 pt-2 pb-2">
-            <input type="email" name="email" placeholder="email" v-model="email"><br>
-            <input type="password" name="password" placeholder="passsword" v-model="password">
+            <v-text-field
+              type="email"
+              label="Email"
+              v-model="email"
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              type="password"
+              v-model="password"
+            ></v-text-field>
             <div class="error" v-html="error"></div>
-            <v-btn class="cyan" @click="register">Register</v-btn>
+            <v-btn
+              dark
+              class="cyan"
+              @click="register"
+              >Register</v-btn>
           </div>
         </div>
     </v-flex>
@@ -46,7 +58,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.error {
-  color: red;
-}
+
 </style>
