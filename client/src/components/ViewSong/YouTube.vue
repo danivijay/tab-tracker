@@ -1,11 +1,16 @@
 <template>
   <panel title="Youtube" class="ml-3">
-    <span>{{youtubeId}}</span>
+    <youtube
+    :video-id="youtubeId"
+    :player-width="200"
+    :player-height="200"
+    ></youtube>
   </panel>
 </template>
 
 <script>
 import Panel from '@/components/Panel'
+
 export default {
   props: [
     'youtubeId'

@@ -42,7 +42,7 @@ export default {
 
   .song {
     padding: 20px;
-    height: 330px;
+    height: 207px;
     overflow: hidden;
   }
   .song-title {
