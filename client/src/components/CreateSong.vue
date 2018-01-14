@@ -102,7 +102,7 @@ export default {
         lyrics: null,
         tab: null
       },
-      required: (value) =>  !!value || 'Required',
+      required: (value) => !!value || 'Required',
       error: null
     }
   },
@@ -118,7 +118,7 @@ export default {
       }
       try {
         await SongsService.post(this.song)
-        this.$router.push ({
+        this.$router.push({
           name: 'songs'
         })
       } catch (err) {
