@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-flex>
-      <song-metadata :song="song" />
+      <song-metadata :song="song"></song-metadata>
     </v-flex>
   </v-layout>
 </template>
@@ -14,7 +14,7 @@ import SongMetadata from './SongMetadata.vue'
 export default {
   data () {
     return {
-      song: null
+      song: {}
     }
   },
   async mounted () {

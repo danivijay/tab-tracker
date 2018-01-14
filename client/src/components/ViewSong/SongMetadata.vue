@@ -1,9 +1,6 @@
 <template>
   <panel title="Songs">
-  <div
-    v-for="song in songs"
-    class="song"
-    :key="song.id">
+  <div class="song">
     <v-layout>
       <v-flex xs6>
         <div class="song-title">
@@ -35,15 +32,30 @@ export default {
   components: {
     Panel
   },
-  mounted() {
-    console.log("song")
-    // TODO: https://www.youtube.com/watch?v=3zw5LgKDMhg
-    console.log(song)
+  mounted () {
+
   }
 }
-
 </script>
 
-<style>
+<style scoped>
 
+  .song {
+    padding: 20px;
+    height: 330px;
+    overflow: hidden;
+  }
+  .song-title {
+    font-size: 20px;
+  }
+  .song-artist {
+    font-size: 15px;
+  }
+  .song-genre {
+    font-size: 10px;
+  }
+  .album-image {
+    width: 70%;
+    margin: 0 auto;
+  }
 </style>
