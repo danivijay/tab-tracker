@@ -4,62 +4,83 @@
         <panel title="Song Metadata">
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="Title"
-              v-model="title"
+              v-model="song.title"
             ></v-text-field>
 
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="Artist"
-              v-model="artist"
+              v-model="song.artist"
             ></v-text-field>
 
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="Genre"
-              v-model="genre"
+              v-model="song.genre"
             ></v-text-field>
 
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="Album"
-              v-model="album"
+              v-model="song.album"
             ></v-text-field>
 
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="Album Art URL"
-              v-model="albumImageUrl"
+              v-model="song.albumImageUrl"
             ></v-text-field>
 
           <v-text-field
               type="text"
+              required
+              :rules="[required]"
               label="YouTube ID"
-              v-model="youtubeId"
+              v-model="song.youtubeId"
             ></v-text-field>
         </panel>
-        <v-btn
-          dark
-          class="cyan"
-          @click="create"
-          >Create Song</v-btn>
+
       </v-flex>
 
       <v-flex xs6>
         <panel title="Song Structure" class="ml-3">
         <v-text-field
             type="text"
+            required
+            :rules="[required]"
             multi-line
             label="Lyrics"
-            v-model="lyrics"
+            v-model="song.lyrics"
           ></v-text-field>
 
         <v-text-field
           type="text"
+          required
+          :rules="[required]"
           multi-line
           label="Tab"
-          v-model="tab"
+          v-model="song.tab"
         ></v-text-field>
+        <span class="error" v-if="error">
+          {{error}}
+        </span>
+        <v-btn
+          dark
+          class="cyan"
+          @click="create"
+          >Create Song</v-btn>
+
         </panel>
       </v-flex>
   </v-layout>
@@ -67,22 +88,42 @@
 
 <script>
 import Panel from '@/components/Panel'
+import SongsService from '@/services/SongsService'
 export default {
   data () {
     return {
-      title: null,
-      artist: null,
-      genre: null,
-      album: null,
-      albumImageUrl: null,
-      youtubeId: null,
-      lyrics: null,
-      tab: null
+      song: {
+        title: null,
+        artist: null,
+        genre: null,
+        album: null,
+        albumImageUrl: null,
+        youtubeId: null,
+        lyrics: null,
+        tab: null
+      },
+      required: (value) =>  !!value || 'Required',
+      error: null
     }
   },
   methods: {
-    create () {
-      // TODO: https://youtu.be/1NSPAz1Qc-I?t=45m37s
+    async create () {
+      this.error = null
+      const areAllFieldsFilledIn = Object
+        .keys(this.song)
+        .every(key => !!this.song[key])
+      if (!areAllFieldsFilledIn) {
+        this.error = 'Please fill in all the required fields'
+        return
+      }
+      try {
+        await SongsService.post(this.song)
+        this.$router.push ({
+          name: 'songs'
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   components: {
