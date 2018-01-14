@@ -1,7 +1,10 @@
 <template>
   <v-layout>
-    <v-flex>
+    <v-flex xs6>
       <song-metadata :song="song"></song-metadata>
+    </v-flex>
+    <v-flex xs6>
+      <you-tube :youtubeId="song.youtubeId" />
     </v-flex>
   </v-layout>
 </template>
@@ -10,6 +13,7 @@
 import SongsService from '@/services/SongsService'
 import Panel from '@/components/Panel'
 import SongMetadata from './SongMetadata.vue'
+import YouTube from './YouTube.vue'
 
 export default {
   data () {
@@ -23,7 +27,8 @@ export default {
   },
   components: {
     Panel,
-    SongMetadata
+    SongMetadata,
+    YouTube
   }
 }
 </script>
