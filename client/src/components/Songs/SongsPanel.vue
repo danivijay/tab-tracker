@@ -1,19 +1,58 @@
 <template>
-  <div>
-    <songs-panel />
-    <songs-search-panel />
-  </div>
+  <v-layout column>
+    <v-flex xs6 offset-xs3>
+      <panel title="Songs">
+          <v-btn
+            slot="action"
+            @click="navigateTo({name: 'songs-create'})"
+            class="cyan accent-2"
+            small
+            light
+            fab
+            absolute
+            right
+            middle
+            ><v-icon>add</v-icon>
+          </v-btn>
+        <div
+          v-for="song in songs"
+          class="song"
+          :key="song.id">
+          <v-layout>
+            <v-flex xs6>
+              <div class="song-title">
+                {{song.title}}
+              </div>
+              <div class="song-artist">
+                {{song.artist}}
+              </div>
+              <div class="song-genre">
+                {{song.genre}}
+              </div>
+              <v-btn
+              dark
+              class="cyan"
+              @click="navigateTo({
+                name: 'song',
+                params: {songId: song.id
+                }
+              })"
+              >View</v-btn>
+            </v-flex>
+
+            <v-flex xs6>
+              <img class="album-image" :src="song.albumImageUrl" alt="">
+            </v-flex>
+          </v-layout>
+        </div>
+      </panel>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 import SongsService from '@/services/SongsService'
-import SongsPanel from './SongsPanel'
-import SongsSearchPanel from './SongsSearchPanel'
 export default {
-  components: {
-    SongsPanel,
-    SongsSearchPanel
-  },
   data () {
     return {
       songs: null
