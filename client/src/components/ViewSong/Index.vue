@@ -44,8 +44,6 @@ export default {
   async mounted () {
     const songId = this.$store.state.route.params.songId
     this.song = (await SongsService.show(songId)).data
-    song.lyrics = song.lyrics.replace(/\n/g, "<br />");
-    song.tab = song.tab.replace(/\n/g, "<br />");
   },
   components: {
     Panel,
