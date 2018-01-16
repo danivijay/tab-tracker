@@ -72,7 +72,7 @@
           label="Tab"
           v-model="song.tab"
         ></v-text-field>
-        <span class="error" v-if="error">
+        <span class="danger-alert" v-if="error">
           {{error}}
         </span>
         <v-btn
