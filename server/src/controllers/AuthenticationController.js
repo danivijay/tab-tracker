@@ -48,6 +48,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
+        val: err,
         error: 'An error is occured while trying to login'
       })
     }
