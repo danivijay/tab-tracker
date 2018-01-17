@@ -24,6 +24,20 @@
             }
           }"
           >Edit Song</v-btn>
+          <v-btn
+          v-if="isUserLoggedIn"
+          dark
+          class="cyan"
+          @click="setAsBookmark"
+          >Bookmark</v-btn>
+
+          <v-btn
+          v-if="isUserLoggedIn"
+          dark
+          class="cyan"
+          @click="unbookmark"
+          >Unbookmark</v-btn>
+
       </v-flex>
 
       <v-flex xs6>
@@ -35,10 +49,33 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import BookmarksService from '@/services/BookmarksService'
+
 export default {
   props: [
     'song'
-  ]
+  ],
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  async mounted () {
+    const bookmark = (await BookmarksService.index({
+      songId: 1,
+      userId: 1
+    })).data
+    console.log('bookmark', bookmark)
+  },
+  methods: {
+    setAsBookmark () {
+      console.log('bookmark')
+    },
+    unbookmark () {
+      console.log('unbookmark')
+    }
+  }
 }
 </script>
 
@@ -46,7 +83,7 @@ export default {
 
   .song {
     padding: 20px;
-    height: 207px;
+    height: 300px;
     overflow: hidden;
   }
   .song-title {
