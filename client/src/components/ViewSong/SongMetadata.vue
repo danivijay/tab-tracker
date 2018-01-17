@@ -25,14 +25,14 @@
           }"
           >Edit Song</v-btn>
           <v-btn
-          v-if="isUserLoggedIn"
+          v-if="isUserLoggedIn && !isBookmarked"
           dark
           class="cyan"
-          @click="setAsBookmark"
+          @click="bookmark"
           >Bookmark</v-btn>
 
           <v-btn
-          v-if="isUserLoggedIn"
+          v-if="isUserLoggedIn && isBookmarked"
           dark
           class="cyan"
           @click="unbookmark"
@@ -56,24 +56,50 @@ export default {
   props: [
     'song'
   ],
+  data () {
+    return {
+      isBookmarked: false
+    }
+  },
   computed: {
     ...mapState([
       'isUserLoggedIn'
     ])
   },
   async mounted () {
+    if(!this.isUserLoggedIn) {
+      return
+    }
+
     const bookmark = (await BookmarksService.index({
-      songId: 1,
-      userId: 1
+      songId: this.song.id,
+      userId: this.$store.state.user.id
     })).data
-    console.log('bookmark', bookmark)
+    this.isBookmarked = !!bookmark
+    console.log('bookmark', this.isBookmarked)
   },
   methods: {
-    setAsBookmark () {
-      console.log('bookmark')
+    async bookmark () {
+      try {
+        await BookmarksService.post({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      }
+      catch (err) {
+        console.log(err)
+      }
     },
-    unbookmark () {
-      console.log('unbookmark')
+    async unbookmark () {
+      try {
+        await BookmarksService.delete({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
   }
 }
