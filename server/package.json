@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "npm run lint",
     "start": "./node_modules/.bin/nodemon src/app.js --exec",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "lint": "./node_modules/.bin/eslint **/*.js",
+    "seed": "node ./seed"
   },
   "author": "Dani Vijay",
   "license": "GPL v2",

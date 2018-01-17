@@ -33,14 +33,12 @@ module.exports = {
           error: 'Incurrect login information1'
         })
       }
-
       const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
           error: 'Incurrect login information2'
         })
       }
-
       const userJson = user.toJSON()
       res.send({
         user: userJson,
