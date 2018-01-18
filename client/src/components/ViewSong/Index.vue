@@ -30,23 +30,38 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import SongsService from '@/services/SongsService'
+import SongHistoryService from '@/services/SongHistoryService'
 import SongMetadata from './SongMetadata.vue'
 import YouTube from './YouTube.vue'
 
 export default {
+  components: {
+    SongMetadata,
+    YouTube
+  },
   data () {
     return {
       song: {}
     }
   },
-  async mounted () {
-    const songId = this.$store.state.route.params.songId
-    this.song = (await SongsService.show(songId)).data
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user',
+      'route'
+    ])
   },
-  components: {
-    SongMetadata,
-    YouTube
+  async mounted () {
+    const songId = this.route.params.songId
+    this.song = (await SongsService.show(songId)).data
+    if (this.isUserLoggedIn) {
+      SongHistoryService.post({
+        songId: songId,
+        userId: this.user.id
+      })
+    }
   }
 }
 </script>
