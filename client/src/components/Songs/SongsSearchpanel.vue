@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout column>
-      <v-flex xs6 offset-xs3>
+      <v-flex>
         <panel title="Search">
           <v-text-field
             label="Search by song title, album or genre"

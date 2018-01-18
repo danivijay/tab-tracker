@@ -1,18 +1,27 @@
 <template>
   <div>
-    <songs-search-panel />
-    <songs-panel class="mt-3" />
+    <v-layout>
+      <v-flex xs6 class>
+        <songs-bookmarks />
+      </v-flex>
+      <v-flex xs6 class="ml-3">
+        <songs-search-panel />
+        <songs-panel class="mt-3" />
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import SongsService from '@/services/SongsService'
+import SongsBookmarks from './SongsBookmarks'
 import SongsPanel from './SongsPanel'
 import SongsSearchPanel from './SongsSearchPanel'
 export default {
   components: {
     SongsPanel,
-    SongsSearchPanel
+    SongsSearchPanel,
+    SongsBookmarks
   },
   data () {
     return {
